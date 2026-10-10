@@ -1,0 +1,58 @@
+NAME: streamingapp
+LAST DEPLOYED: Sat Oct 10 19:40:00 2026
+NAMESPACE: streamingapp-helm
+STATUS: deployed
+REVISION: 17
+DESCRIPTION: Upgrade complete
+RESOURCES:
+==> v1/ConfigMap
+NAME                  DATA   AGE
+streamingapp-config   4      8d
+
+==> v1/Service
+NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+admin-svc   ClusterIP   10.96.217.230   <none>        3003/TCP   8d
+auth-svc   ClusterIP   10.96.232.117   <none>   3001/TCP   8d
+chat-svc   ClusterIP   10.96.22.145   <none>   3004/TCP   8d
+frontend-svc   ClusterIP   10.96.127.209   <none>   80/TCP   8d
+mongo   ClusterIP   None   <none>   27017/TCP   8d
+streaming-svc   ClusterIP   10.96.104.183   <none>   3002/TCP   8d
+
+==> v1/Deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+admin   2/2     2            2           8d
+auth   2/2   2     2     8d
+chat   2/2   2     2     8d
+frontend   2/2   2     2     8d
+streaming   4/4   4     4     8d
+
+==> v1/Pod(related)
+NAME                     READY   STATUS    RESTARTS       AGE
+admin-5c74b5c545-lttmd   1/1     Running   6 (130m ago)   22h
+admin-5c74b5c545-rwwwc   1/1     Running   6 (129m ago)   22h
+auth-7c65df9d7c-c686j   1/1   Running   7 (130m ago)   23h
+auth-7c65df9d7c-rq6gd   1/1   Running   7 (129m ago)   23h
+chat-57f754c697-f8cpl   1/1   Running   8 (131m ago)   8d
+chat-57f754c697-swdw8   1/1   Running   8 (130m ago)   8d
+frontend-845dd6b47b-hxftk   1/1   Running   1 (138m ago)   4h49m
+frontend-845dd6b47b-rgcbf   1/1   Running   1 (139m ago)   4h50m
+streaming-6975fc9d54-9ntqb   1/1   Running   6 (130m ago)   22h
+streaming-6975fc9d54-ch7kq   1/1   Running   6 (129m ago)   22h
+streaming-6975fc9d54-p7f82   1/1   Running   0              59m
+streaming-6975fc9d54-q9hz8   1/1   Running   6 (129m ago)   22h
+mongo-0   1/1   Running   2 (24h ago)   8d
+
+==> v1/StatefulSet
+NAME    READY   AGE
+mongo   1/1     8d
+
+==> v1/Ingress
+NAME                   CLASS   HOSTS                     ADDRESS     PORTS   AGE
+streamingapp-ingress   nginx   helm.streamingapp.local   localhost   80      8d
+
+==> v1/Secret
+NAME                  TYPE     DATA   AGE
+streamingapp-secret   Opaque   4      8d
+
+
+TEST SUITE: None

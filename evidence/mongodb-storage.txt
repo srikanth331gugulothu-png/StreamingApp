@@ -1,0 +1,5 @@
+NAME                     READY   AGE
+statefulset.apps/mongo   1/1     8d
+
+NAME                                       STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/mongo-data-mongo-0   Bound    pvc-619e2cc0-9ac9-4487-b030-85920a724cdd   5Gi        RWO            standard       <unset>                 8d

@@ -1,0 +1,7 @@
+LAST SEEN   TYPE     REASON             OBJECT                            MESSAGE
+59m         Normal   Scheduled          pod/streaming-6975fc9d54-p7f82    Successfully assigned streamingapp-helm/streaming-6975fc9d54-p7f82 to streamingapp-control-plane
+59m         Normal   Killing            pod/streaming-6975fc9d54-5hvwm    Stopping container streaming
+59m         Normal   Pulled             pod/streaming-6975fc9d54-p7f82    Container image "srikanthgugulothu/streaming-stream:1.0.0" already present on machine and can be accessed by the pod
+59m         Normal   Created            pod/streaming-6975fc9d54-p7f82    Container created
+59m         Normal   Started            pod/streaming-6975fc9d54-p7f82    Container started
+59m         Normal   SuccessfulCreate   replicaset/streaming-6975fc9d54   Created pod: streaming-6975fc9d54-p7f82

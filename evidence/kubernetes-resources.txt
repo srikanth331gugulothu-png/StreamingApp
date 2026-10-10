@@ -1,0 +1,32 @@
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                       SELECTOR
+deployment.apps/admin       2/2     2            2           8d    admin        srikanthgugulothu/streaming-admin:1.0.0      app=admin
+deployment.apps/auth        2/2     2            2           8d    auth         srikanthgugulothu/streaming-auth:1.0.2       app=auth
+deployment.apps/chat        2/2     2            2           8d    chat         srikanthgugulothu/streaming-chat:1.0.0       app=chat
+deployment.apps/frontend    2/2     2            2           8d    frontend     srikanthgugulothu/streaming-frontend:1.0.5   app=frontend
+deployment.apps/streaming   4/4     4            4           8d    streaming    srikanthgugulothu/streaming-stream:1.0.0     app=streaming
+
+NAME                             READY   STATUS    RESTARTS       AGE     IP            NODE                         NOMINATED NODE   READINESS GATES
+pod/admin-5c74b5c545-lttmd       1/1     Running   6 (130m ago)   22h     10.244.0.39   streamingapp-control-plane   <none>           <none>
+pod/admin-5c74b5c545-rwwwc       1/1     Running   6 (129m ago)   22h     10.244.0.38   streamingapp-control-plane   <none>           <none>
+pod/auth-7c65df9d7c-c686j        1/1     Running   7 (130m ago)   23h     10.244.0.37   streamingapp-control-plane   <none>           <none>
+pod/auth-7c65df9d7c-rq6gd        1/1     Running   7 (129m ago)   23h     10.244.0.36   streamingapp-control-plane   <none>           <none>
+pod/chat-57f754c697-f8cpl        1/1     Running   8 (131m ago)   8d      10.244.0.5    streamingapp-control-plane   <none>           <none>
+pod/chat-57f754c697-swdw8        1/1     Running   8 (130m ago)   8d      10.244.0.6    streamingapp-control-plane   <none>           <none>
+pod/frontend-845dd6b47b-hxftk    1/1     Running   1 (138m ago)   4h49m   10.244.0.47   streamingapp-control-plane   <none>           <none>
+pod/frontend-845dd6b47b-rgcbf    1/1     Running   1 (139m ago)   4h50m   10.244.0.46   streamingapp-control-plane   <none>           <none>
+pod/mongo-0                      1/1     Running   2 (24h ago)    8d      10.244.0.29   streamingapp-control-plane   <none>           <none>
+pod/streaming-6975fc9d54-9ntqb   1/1     Running   6 (130m ago)   22h     10.244.0.43   streamingapp-control-plane   <none>           <none>
+pod/streaming-6975fc9d54-ch7kq   1/1     Running   6 (129m ago)   22h     10.244.0.40   streamingapp-control-plane   <none>           <none>
+pod/streaming-6975fc9d54-p7f82   1/1     Running   0              59m     10.244.0.48   streamingapp-control-plane   <none>           <none>
+pod/streaming-6975fc9d54-q9hz8   1/1     Running   6 (129m ago)   22h     10.244.0.42   streamingapp-control-plane   <none>           <none>
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE   SELECTOR
+service/admin-svc       ClusterIP   10.96.217.230   <none>        3003/TCP    8d    app=admin
+service/auth-svc        ClusterIP   10.96.232.117   <none>        3001/TCP    8d    app=auth
+service/chat-svc        ClusterIP   10.96.22.145    <none>        3004/TCP    8d    app=chat
+service/frontend-svc    ClusterIP   10.96.127.209   <none>        80/TCP      8d    app=frontend
+service/mongo           ClusterIP   None            <none>        27017/TCP   8d    app=mongo
+service/streaming-svc   ClusterIP   10.96.104.183   <none>        3002/TCP    8d    app=streaming
+
+NAME                                             CLASS   HOSTS                     ADDRESS     PORTS   AGE
+ingress.networking.k8s.io/streamingapp-ingress   nginx   helm.streamingapp.local   localhost   80      8d
