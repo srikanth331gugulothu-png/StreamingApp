@@ -84,6 +84,133 @@ REACT_APP_CHAT_SOCKET_URL=http://localhost:3004
    ```
 3. Navigate to `http://localhost:3000` for the web app.
 
+## Kubernetes Deployment with Helm
+
+### Prerequisites
+
+- Docker Desktop and a running Kubernetes cluster
+- `kubectl`
+- Helm 3
+- NGINX Ingress Controller
+- Access to the required Docker Hub images
+
+### Helm Chart Validation
+
+Run from the repository root:
+
+```bash
+helm lint ./helm/streamingapp
+```
+
+### Install or Upgrade
+
+```bash
+helm upgrade --install streamingapp ./helm/streamingapp \
+  --namespace streamingapp-helm \
+  --create-namespace
+```
+
+### Verify Deployment Resources
+
+```bash
+helm status streamingapp -n streamingapp-helm
+
+kubectl get deployments -n streamingapp-helm
+kubectl get pods -n streamingapp-helm
+kubectl get services -n streamingapp-helm
+kubectl get ingress -n streamingapp-helm
+kubectl get statefulset,pvc -n streamingapp-helm
+```
+
+### Access the Application
+
+The configured Ingress host is `helm.streamingapp.local`.
+
+For the local Kind environment, forward the NGINX Ingress Controller port:
+
+```bash
+kubectl port-forward -n ingress-nginx \
+  service/ingress-nginx-controller 8081:80
+```
+
+Open the application:
+
+http://helm.streamingapp.local:8081/
+
+The URL requires the local Ingress configuration and port-forward to be running.
+
+### Scaling and Rolling Updates
+
+Scale the streaming deployment to four replicas:
+
+```bash
+kubectl scale deployment/streaming \
+  --replicas=4 -n streamingapp-helm
+```
+
+Check rollout status:
+
+```bash
+kubectl rollout status deployment/streaming \
+  -n streamingapp-helm
+```
+
+### Smoke Tests
+
+Verify these workflows in the deployed application:
+
+1. Register or log in.
+2. Browse the video catalogue.
+3. Play an available video.
+4. Upload a video and thumbnail through the admin interface.
+5. Verify real-time chat between browser sessions.
+6. Delete a test application pod and confirm Kubernetes recreates it.
+
+### Troubleshooting
+
+Inspect recent events:
+
+```bash
+kubectl get events -n streamingapp-helm \
+  --sort-by='.lastTimestamp'
+```
+
+Inspect deployment details:
+
+```bash
+kubectl describe deployment/streaming \
+  -n streamingapp-helm
+```
+
+Inspect logs:
+
+```bash
+kubectl logs deployment/streaming \
+  -n streamingapp-helm --tail=100
+```
+
+### Security
+
+- Never commit real AWS access keys, JWT secrets or passwords.
+- Supply sensitive values using a secure configuration mechanism.
+- Use least-privilege permissions for AWS S3 access.
+- Keep credentials out of public GitHub repositories.
+
+## Docker Images
+
+The application uses the following Docker Hub images:
+
+| Service | Image |
+|---|---|
+| Admin | `srikanthgugulothu/streaming-admin:1.0.0` |
+| Auth | `srikanthgugulothu/streaming-auth:1.0.2` |
+| Chat | `srikanthgugulothu/streaming-chat:1.0.0` |
+| Streaming | `srikanthgugulothu/streaming-stream:1.0.0` |
+| Frontend | `srikanthgugulothu/streaming-frontend:1.0.5` |
+
+These are the image tags used in the deployment. Verify that each image remains publicly accessible before submitting.
+
+
 The compose file provisions MongoDB plus all four Node.js microservices. S3 credentials are optional for local testing—you can still browse seeded metadata, but streaming requires valid S3 objects.
 
 ## Local Development
