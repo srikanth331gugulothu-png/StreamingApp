@@ -130,3 +130,29 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# macOS files
+.DS_Store
+**/.DS_Store
+
+# Environment and secrets
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Build outputs and dependencies
+**/node_modules/
+**/build/
+coverage/
+
+# Downloaded test media
+downloaded-video.mp4
+downloaded-thumbnail.HEIC
+
+# Local temporary files
+umask
+
+# Kubernetes secrets containing credentials
+k8s/secret.yaml
+**/secret.yaml

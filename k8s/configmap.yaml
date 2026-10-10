@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streamingapp-config
+  namespace: streamingapp
+data:
+  MONGO_DB: "streamingapp"
+  AWS_REGION: "ap-south-1"
+  CLIENT_URLS: "http://streamingapp.local:8080"
+  STREAMING_PUBLIC_URL: "http://streamingapp.local"

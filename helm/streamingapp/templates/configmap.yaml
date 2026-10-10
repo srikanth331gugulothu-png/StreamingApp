@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "streamingapp.fullname" . }}-config
+  labels:
+    {{- include "streamingapp.labels" . | nindent 4 }}
+data:
+  MONGO_DB: {{ .Values.config.mongoDb | quote }}
+  AWS_REGION: {{ .Values.config.awsRegion | quote }}
+  CLIENT_URLS: {{ .Values.config.clientUrls | quote }}
+  STREAMING_PUBLIC_URL: {{ .Values.config.streamingPublicUrl | quote }}

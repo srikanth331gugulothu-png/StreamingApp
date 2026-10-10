@@ -1,0 +1,64 @@
+namespace: streamingapp
+
+services:
+  admin:
+    replicaCount: 2
+    image:
+      repository: srikanthgugulothu/streaming-admin
+      tag: "1.0.0"
+    port: 3003
+
+  auth:
+    replicaCount: 2
+    image:
+      repository: srikanthgugulothu/streaming-auth
+      tag: "1.0.2"
+    port: 3001
+
+  chat:
+    replicaCount: 2
+    image:
+      repository: srikanthgugulothu/streaming-chat
+      tag: "1.0.0"
+    port: 3004
+
+  streaming:
+    replicaCount: 4
+    image:
+      repository: srikanthgugulothu/streaming-stream
+      tag: "1.0.0"
+    port: 3002
+
+  frontend:
+    replicaCount: 2
+    image:
+      repository: srikanthgugulothu/streaming-frontend
+      tag: "1.0.5"
+    port: 80
+
+mongo:
+  image:
+    repository: mongo
+    tag: "6"
+  replicaCount: 1
+  port: 27017
+  storage: 5Gi
+
+config:
+  mongoDb: streamingapp
+  awsRegion: ap-south-1
+  clientUrls: "http://helm.streamingapp.local:8081"
+  streamingPublicUrl: "http://helm.streamingapp.local:8081"
+
+secret:
+  jwtSecret: "streamingapp-dev-secret-change-this"
+  awsAccessKeyId: ""
+  awsSecretAccessKey: ""
+  awsS3Bucket: "streamingapp-1791465516-26499"
+
+ingress:
+  enabled: true
+  className: nginx
+  host: helm.streamingapp.local
+  proxyReadTimeout: "3600"
+  proxySendTimeout: "3600"

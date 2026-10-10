@@ -49,20 +49,20 @@ const buildPlaybackUrl = (value) => {
 };
 
 export const streamingService = {
-  async getFeaturedVideos() {
-    const { data } = await streamingApi.get('/streaming/videos/featured');
-    return data.videos || [];
-  },
+async getFeaturedVideos() {
+  const { data } = await streamingApi.get('/videos/featured');
+  return data.videos || [];
+},
 
-  async getVideos(params = {}) {
-    const { data } = await streamingApi.get('/streaming/videos', { params });
-    return data.videos || [];
-  },
+async getVideos(params = {}) {
+  const { data } = await streamingApi.get('/videos', { params });
+  return data.videos || [];
+},
 
-  async getVideoDetails(videoId) {
-    const { data } = await streamingApi.get(`/streaming/videos/${videoId}`);
-    return data.video;
-  },
+async getVideoDetails(videoId) {
+  const { data } = await streamingApi.get(`/videos/${videoId}`);
+  return data.video;
+},
 
   getPlaybackUrl(videoOrPath) {
     if (!videoOrPath) {
